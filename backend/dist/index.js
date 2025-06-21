@@ -21,6 +21,7 @@ wss.on("connection", (ws) => {
         }
         else if (message.type === "create-offer") {
             console.log("Offer come");
+            console.log(message.sdp);
             receiverSocket === null || receiverSocket === void 0 ? void 0 : receiverSocket.send(JSON.stringify({
                 type: "offer",
                 sdp: message.sdp
@@ -34,6 +35,8 @@ wss.on("connection", (ws) => {
             }));
         }
         else if (message.type === "ice-candidates") {
+            console.log("Inside message type ===== ice-candidates");
+            console.log(message.candidate);
             if (ws === senderSocket) {
                 receiverSocket === null || receiverSocket === void 0 ? void 0 : receiverSocket.send(JSON.stringify({
                     type: "iceCandidates",
