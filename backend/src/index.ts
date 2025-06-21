@@ -19,14 +19,17 @@ wss.on("connection"  , (ws : WebSocket) => {
             console.log("Sender come" ) ;
             senderSocket = ws ;
         }
-        else  if(message.type === " Receiver"){
+        else  if(message.type === "Receiver"){
+            console.log("receiver come")
             receiverSocket = ws ;
         }else if(message.type === "create-offer") {
+            console.log("Offer come")
             receiverSocket?.send(JSON.stringify({
                 type : "offer" , 
                 sdp : message.sdp 
             }))
-        }else if(message.type === "create-answer") {
+        }else if(message.type === "create-answerer") {
+            console.log("Answer come")
             senderSocket?.send(JSON.stringify({
                 type : "answer" ,
                 sdp : message.sdp 
